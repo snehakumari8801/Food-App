@@ -21,7 +21,7 @@ const {cloudinaryConnect} = require("../server/config/cloudinary");
 cloudinaryConnect();
 
 app.use(cors({
-    origin: 'http://localhost:3000' // Allow requests from this origin
+    origin:'https://food-app-13.onrender.com'               //'http://localhost:3000' // Allow requests from this origin
   }));
 
 const userRoute = require("./routes/User");
@@ -35,4 +35,4 @@ app.use("/api/v1/upload" , Upload)
 const PORT = process.env.PORT || 4000
 app.listen(PORT , ()=>{
     console.log(`Server is running at ${PORT}`);
-});
+})
