@@ -173,11 +173,13 @@ function Allproducts() {
         )} */}
         <h1 className="text-4xl font-semibold text-red-800">All Food Items</h1>
 
+        {user?.role === "Instructor" &&
         <Link to="/instructorportal">
           <h3 className="p-3 mt-3 rounded-xl cursor-pointer bg-red-500 text-white font-bold">
             Add Product
           </h3>
         </Link>
+        }
       </div>
 
       {/* Product Grid */}
