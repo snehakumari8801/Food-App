@@ -21,7 +21,7 @@ const {cloudinaryConnect} = require("../server/config/cloudinary");
 cloudinaryConnect();
 
 app.use(cors({
-    origin: 'https://food-app-13.onrender.com' // Allow requests from this origin
+    origin:'http://localhost:3000' // Allow requests from this origin
   }));
 
 const userRoute = require("./routes/User");
