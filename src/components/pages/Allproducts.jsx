@@ -205,7 +205,7 @@ function Allproducts() {
             </div>
           ))
         ) : (
-          <p>No products available.</p>
+          <p>Loading...</p>
         )}
       </div>
     </div>
