@@ -1,69 +1,9 @@
-// import { endpoints } from "../apis";
-// import { apiConnector } from "../operations/apiConnector";
-// import { setLoading, setToken,setProducts } from "../../slices/userSlice";
-// import { useDispatch } from "react-redux";
-
-// const { SIGNUP_API, LOGIN_API, CREATE_PRODUCT_API } = endpoints;
-
-// export function signup(firstName, lastName, password, email, role, navigate) {
-//   return async (dispatch) => {
-//     dispatch(setLoading(true));
-//     try {
-//       const response = await apiConnector("POST", SIGNUP_API, {
-//         firstName,
-//         lastName,
-//         password,
-//         email,
-//         role,
-//       });
-
-//       console.log("SIGNUP API RESPONSE............", response);
-
-//       if (!response.data.success) {
-//         throw new Error(response.data.message);
-//       }
-//       navigate("/login");
-//     } catch (error) {
-//       console.log("SIGNUP API ERROR............", error);
-//       navigate("/signup");
-//     }
-//     dispatch(setLoading(false));
-//   };
-// }
-
-// export function login(email, password, navigate) {
-//   return async (dispatch) => {
-//     dispatch(setLoading(true));
-//     try {
-//       const response = await apiConnector("POST", LOGIN_API, {
-//         email,
-//         password,
-//       });
-
-//       console.log("LOGIN API RESPONSE............", response);
-
-//       if (!response.data.success) {
-//         throw new Error(response.data.message);
-//       }
-
-//       dispatch(setToken(response.data.token));
-//       localStorage.setItem("token", JSON.stringify(response.data.token));
-
-//       navigate("/instructorportal");
-//     } catch (error) {
-//       console.log("LOGIN API ERROR............", error);
-//     }
-//     dispatch(setLoading(false));
-//   };
-// }
-
 import {
   setLoading,
   setToken,
   setProducts,
   setError,
   setUser,
-  user
 } from "../../slices/userSlice";
 import { endpoints } from "../apis";
 import { apiConnector } from "../operations/apiConnector";
@@ -78,7 +18,7 @@ const {
   GET_FULL_PRODUCT_DETAILS_AUTHENTICATED,
   DELETE_PRODUCT_API,
   BUY_PRODUCT_API,
-  GET_ALL_BUY_PRODUCT
+  GET_ALL_BUY_PRODUCT,
 } = endpoints;
 
 // Signup Action
@@ -110,17 +50,16 @@ export function signup(firstName, lastName, password, email, role, navigate) {
   };
 }
 
-// Login Action
 export function login(email, password, navigate) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
+      // Call the API to log in
       const response = await apiConnector("POST", LOGIN_API, {
         email,
         password,
       });
 
-      console.log(email,password)
       console.log("LOGIN API RESPONSE............", response);
 
       if (!response.data.success) {
@@ -128,11 +67,19 @@ export function login(email, password, navigate) {
       }
 
       dispatch(setToken(response.data.token));
+      dispatch(setUser(response.data.user));
+
       localStorage.setItem("token", JSON.stringify(response.data.token));
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      {user?.role==="Instructor" ? navigate("/products"):navigate("/")}
+
+      const role = response.data.user?.role;
+      if (role === "Instructor") {
+        navigate("/products");
+      } else {
+        navigate("/");
+      }
     } catch (error) {
-      console.log("LOGIN API ERROR............", error);
+      console.error("LOGIN API ERROR............", error);
       dispatch(setError(error.message || "Failed to login"));
     } finally {
       dispatch(setLoading(false));
@@ -162,55 +109,6 @@ export const createProduct = async (data, token, navigate) => {
   return result;
 };
 
-//create product
-// export const createProduct = (
-//   name,
-//   price,
-//   newPrice,
-//   category,
-//   token,
-//   navigate
-// ) => {
-//   console.log(name, price, newPrice, category, token);
-//   return async (dispatch) => {
-//     dispatch(setLoading(true));
-//     console.log("start")
-//     try {
-//       const response = await apiConnector(
-//         "POST",
-//         CREATE_PRODUCT_API,
-//         {
-//           name,
-//           price,
-//           newPrice,
-//           category,
-//         },
-
-//         {
-//           Authorization: `Bearer ${token}`, // Assuming token should be in headers
-//         }
-//       );
-
-//       console.log("CREATE PRODUCT API RESPONSE:", response);
-
-//       if (!response?.data?.success) {
-//         throw new Error("Could Not Add Product");
-//       }
-
-//       const product = response?.data?.data;
-//       console.log("Product to dispatch:", product);
-//       dispatch(setProducts(product)); // Ensure a single product is stored correctly
-//       // Uncomment if navigation is required
-//       navigate("/products"); // Navigate to a details page if necessary
-//     } catch (error) {
-//       console.log("CREATE PRODUCT API ERROR:", error);
-//       dispatch(setError(error.message || "Failed to create product"));
-//     } finally {
-//       dispatch(setLoading(false));
-//     }
-//   };
-// };
-
 export const getAllProducts = async () => {
   let result = [];
   try {
@@ -237,7 +135,7 @@ export const buyProducts = async (id, token) => {
       "POST",
       BUY_PRODUCT_API,
       {
-        id
+        id,
       },
       {
         Authorization: `Bearer ${token}`,
@@ -264,10 +162,9 @@ export const getAllBuyProduct = async () => {
   let result = [];
   try {
     console.log("Before api");
-    const response = await apiConnector("GET",  
-      GET_ALL_BUY_PRODUCT);
+    const response = await apiConnector("GET", GET_ALL_BUY_PRODUCT);
 
-      console.log("after api")
+    console.log("after api");
 
     if (!response?.data?.success) {
       throw new Error("Could Not Fetch Buy products");
@@ -278,27 +175,6 @@ export const getAllBuyProduct = async () => {
   }
   return result;
 };
-
-//
-
-//    //console.log("Buy ", id)
-//    let result = [];
-//    try{
-//     const response = await apiConnector("POST" ,BUY_PRODUCT_API,id);
-//     console.log("BUY PRODUCT API RESPONSE...... " , response);
-//      if(!response?.data?.success){
-//       console.log("Couldn't buy product")
-//      }
-//      result = response?.data?.data;
-//    }catch(error){
-//     console.log("BUY PRODUCT ERROR....", error.message);
-//    }
-// }
-
-// fetching all courses under a specific instructor
-
-
-
 
 export const fetchInstructorCourses = async (token) => {
   let result = [];

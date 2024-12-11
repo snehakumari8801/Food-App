@@ -59,7 +59,6 @@ exports.imageUpload = async(req,res) =>{
             })
         }
 
-        //agar file format supported
         const response = await uploadImageToCloudinary(file , "Products");
         console.log("Response is " ,response)
 

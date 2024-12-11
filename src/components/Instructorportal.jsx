@@ -12,15 +12,12 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./pages/Navbar";
 import { Link } from "react-router-dom";
 
-
 function Instructorportal() {
   const { editProduct } = useSelector((state) => state.auth);
   const { products } = useSelector((state) => state.auth);
-const { token, editProductId } = useSelector((state) => state.auth);
+  const { token, editProductId } = useSelector((state) => state.auth);
 
-  console.log("Products is ",typeof products ,products , editProductId);
-
-
+  console.log("Products is ", typeof products, products, editProductId);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -68,36 +65,40 @@ const { token, editProductId } = useSelector((state) => state.auth);
     if (editProduct && isFormUpdated()) {
       const formData = new FormData();
 
-if (editProductId) {
-  const productToEdit = products.find(product => product._id === editProductId);
-  formData.append("productId", productToEdit._id);
+      if (editProductId) {
+        const productToEdit = products.find(
+          (product) => product._id === editProductId
+        );
+        formData.append("productId", productToEdit._id);
 
-  console.log("Edit productId is " , editProductId)
+        console.log("Edit productId is ", editProductId);
 
-      if (data.Name !== productToEdit.name) formData.append("name", data.Name);
-      if (data.Price !== productToEdit.price) formData.append("price", data.Price);
-      if (data.NewPrice !== productToEdit.newPrice)
-        formData.append("newPrice", data.NewPrice);
-      if (data.Category !== productToEdit.category)
-        formData.append("category", data.Category);
-      if (data.Image !== productToEdit.thumbnail)
-        formData.append("thumbnail", data.Image);
+        if (data.Name !== productToEdit.name)
+          formData.append("name", data.Name);
+        if (data.Price !== productToEdit.price)
+          formData.append("price", data.Price);
+        if (data.NewPrice !== productToEdit.newPrice)
+          formData.append("newPrice", data.NewPrice);
+        if (data.Category !== productToEdit.category)
+          formData.append("category", data.Category);
+        if (data.Image !== productToEdit.thumbnail)
+          formData.append("thumbnail", data.Image);
 
-      dispatch(setLoading(true));
-      try {
-        const result = await editProductsDetails(formData, token);
-        if (result) {
-          navigate('/products')
-          console.log("Result of edit product is ", result);
-        } else {
-          console.log("Product is not edited ");
+        dispatch(setLoading(true));
+        try {
+          const result = await editProductsDetails(formData, token);
+          if (result) {
+            navigate("/products");
+            console.log("Result of edit product is ", result);
+          } else {
+            console.log("Product is not edited ");
+          }
+        } catch (error) {
+          console.error("Error editing product:", error);
+        } finally {
+          dispatch(setLoading(false));
         }
-      } catch (error) {
-        console.error("Error editing product:", error);
-      } finally {
-        dispatch(setLoading(false));
       }
-    }
     } else {
       const formData = new FormData();
       formData.append("name", data.Name);
@@ -251,36 +252,12 @@ if (editProductId) {
 
 export default Instructorportal;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useEffect } from "react"; 
+// import React, { useEffect } from "react";
 // import { useForm } from "react-hook-form";
 // import { useDispatch, useSelector } from "react-redux";
 // import { setProducts, setLoading } from "../slices/userSlice";
 // import Upload from "../components/Upload";
-// import {        
+// import {
 //   editProductsDetails,
 //   createProduct,
 //   fetchInstructorCourses,

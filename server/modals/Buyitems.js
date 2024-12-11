@@ -8,7 +8,7 @@ const buyitemsSchema = new mongoose.Schema({
   details: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Product",
-    required: true, // Ensure that details must contain valid product references if needed
+    required: true, 
   }],
 }, {
   timestamps: true, // Automatically manage createdAt and updatedAt fields

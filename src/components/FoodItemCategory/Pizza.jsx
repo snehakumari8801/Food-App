@@ -56,7 +56,7 @@ function Pizza() {
         {pizzaProduct.map((pizza) => {
           return (
             <div
-              className="overflow-x-hidden shadow-xl flex justify-center"
+              className="overflow-x-hidden shadow-xl flex justify-center capitalize"
               onClick={() => handleProductClick(pizza._id)}
             >
               <div className="flex flex-col">
@@ -66,9 +66,9 @@ function Pizza() {
                   className="h-[230px] w-[260px]"
                 />
                 <div className="flex flex-col justify-center items-center">
-                  <p>{pizza.name}</p>
+                  <p className="font-semibold">{pizza.name}</p>
                   <p>Rs.{pizza.newPrice}</p>
-                  <p className="line-through">Rs.{pizza.price}</p>
+                  <p className="line-through text-red-500">Rs.{pizza.price}</p>
                 </div>
               </div>
             </div>

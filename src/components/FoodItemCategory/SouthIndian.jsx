@@ -52,7 +52,7 @@ function SouthIndian() {
     <div className="overflow-x-hidden m-3 ">
       <Navbar />
       <h1 className="mt-2 flex justify-center text-xl text-red-600 font-bold">South Indian</h1>
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 mt-10">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 mt-10 capitalize">
         {foodProducts.map((food) => {
           return (
             <div
@@ -67,9 +67,9 @@ function SouthIndian() {
                 />
 
                 <div className="flex flex-col justify-center items-center">
-                  <p>{food.name}</p>
+                  <p className="font-semibold">{food.name}</p>
                   <p>Rs.{food.newPrice}</p>
-                  <p className="line-through">Rs.{food.price}</p>
+                  <p className="line-through text-red-500">Rs.{food.price}</p>
                 </div>
               </div>
             </div>

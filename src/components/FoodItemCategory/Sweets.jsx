@@ -52,7 +52,7 @@ function Sweets() {
     <div className="overflow-x-hidden m-3">
       <Navbar />
       <h1 className="mt-20  flex justify-center text-xl text-red-600 font-bold">Sweets</h1>
-      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 mt-10">
+      <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 mt-10 capitalize">
         {sweetProduct.map((sweet) => {
           return (
             <div
@@ -67,9 +67,9 @@ function Sweets() {
                 />
 
                 <div className="flex flex-col justify-center items-center">
-                  <p>{sweet.name}</p>
+                  <p className="font-semibold">{sweet.name}</p>
                   <p>Rs.{sweet.newPrice}</p>
-                  <p className="line-through">Rs.{sweet.price}</p>
+                  <p className="line-through text-red-500">Rs.{sweet.price}</p>
                 </div>
               </div>
             </div>

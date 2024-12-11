@@ -4,12 +4,9 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const Product = require("../modals/Products");
 
-// Signup Controller for Registering USers
 exports.signup = async (req, res) => {
   try {
-    // Destructure fields from the request body
     const { firstName, lastName, password, email, role } = req.body;
-    // Check if All Details are there or not
     if (!firstName || !lastName || !email || !password || !role) {
       return res.status(403).send({
         success: false,
@@ -17,7 +14,6 @@ exports.signup = async (req, res) => {
       });
     }
 
-    // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({

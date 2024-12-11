@@ -5,7 +5,7 @@ const initialState = {
   token: localStorage.getItem("token")
     ? JSON.parse(localStorage.getItem("token"))
     : null,
-  products: null, // Changed from null to an empty array, assuming products are expected to be an array
+  products: null,
   user: localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : null,
@@ -14,7 +14,7 @@ const initialState = {
   error: null,
   editProduct: null,
   editProductId: null,
-  formDetails: [], // Initialized as an empty object
+  formDetails: [],
   cart: [],
   currentId: null,
   isToggle: false,
@@ -37,7 +37,7 @@ const userSlice = createSlice({
       state.loading = action.payload;
     },
     setProducts: (state, action) => {
-      state.products = action.payload; // Ensure action.payload is serializable
+      state.products = action.payload;
     },
     setSignupData: (state, action) => {
       state.signupData = action.payload;
@@ -88,7 +88,7 @@ export const {
   setCurrentId,
   isToggle,
   setIsToggle,
-  user
+  user,
 } = userSlice.actions;
 
 // Export reducer

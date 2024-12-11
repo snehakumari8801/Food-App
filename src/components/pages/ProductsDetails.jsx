@@ -61,16 +61,17 @@ function ProductsDetails() {
             <h1 className='flex flex-col justify-center items-center'>Product Details</h1>
            
                  {currentProduct ? (
-                <div className='flex flex-col justify-center items-center m-10'>
-                    <h2>{currentProduct.name}</h2>
+                <div className='flex flex-col justify-center items-center m-10 mt-20 
+                capitalize '>
+                    <h2 className='text-2xl font-semibold'>{currentProduct.name}</h2>
                     <img src={currentProduct.thumbnail} alt='not image found'
-                     className='h-[300px] w-[300px]'/>
-                    <p>Price: Rs.{currentProduct.price}</p>
+                     className='h-[300px] w-[300px] mt-5'/>
+                    <p className='line-through mt-5'>Price: Rs.{currentProduct.price}</p>
                     <p>Offered Price: Rs.{currentProduct.newPrice}</p>
                     <div className='flex gap-10'>
                    
                     <Link to='/cart'>
-                    <button className='bg-red-500' 
+                    <button className='bg-green-500 w-[120px] p-1 mt-2 text-white font-semibold' 
                     onClick={()=>buyHandler(currentProduct._id)}>Buy now</button>
                     </Link>
                     </div>

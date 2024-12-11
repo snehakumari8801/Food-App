@@ -51,7 +51,7 @@ function NorthIndian() {
   return (
     <div className="overflow-x-hidden m-3">
       <Navbar />
-      <h1 className="mt-20 flex justify-center text-xl text-red-600 font-bold">North Indian</h1>
+      <h1 className="mt-20 flex justify-center capitalize text-xl text-red-600 font-bold">North Indian</h1>
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 mt-10">
         {foodProducts.map((food) => {
           return (
@@ -63,13 +63,13 @@ function NorthIndian() {
                 <img
                   src={food.thumbnail}
                   alt=""
-                  className="h-[230px] w-[260px]"
+                  className="h-[230px] w-[260px] font-semibold"
                 />
 
                 <div className="flex flex-col justify-center items-center">
                   <p>{food.name}</p>
                   <p>Rs.{food.newPrice}</p>
-                  <p className="line-through">Rs.{food.price}</p>
+                  <p className="line-through text-red-500">Rs.{food.price}</p>
                 </div>
               </div>
             </div>
