@@ -97,13 +97,15 @@ function Navbar() {
                 Logout
               </li>
             )}
-            {/* {user?.role === "Customer" && ( */}
+
+           
               <Link to="/">
                 <li className="hover:bg-red-400 p-2 text-center cursor-pointer">
                   Go to all products
                 </li>
               </Link>
-            {/* )} */}
+
+          
             {user?.role === "Instructor" && (
               <Link to="/products">
                 <li className="hover:bg-red-400 p-2 text-center cursor-pointer">

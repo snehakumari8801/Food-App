@@ -66,13 +66,14 @@ function Allproducts() {
           {userRole === "Instructor" ? "Instructor Portal" : "All Food Items"}
         </h1>
 
-        {userRole === "Instructor" && (
-          <Link to="/instructorportal">
-            <h3 className="p-3 mt-3 rounded-xl cursor-pointer bg-red-500 text-white font-bold">
-              Add Product
-            </h3>
-          </Link>
-        )}
+
+        {user?.role === "Instructor" &&
+        <Link to="/instructorportal">
+          <h3 className="p-3 mt-3 rounded-xl cursor-pointer bg-red-500 text-white font-bold">
+            Add Product
+          </h3>
+        </Link>
+        }
       </div>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 ml-10 md:12 sm:26">
@@ -103,7 +104,8 @@ function Allproducts() {
             </div>
           ))
         ) : (
-          <p>No products available</p>
+
+          <p>Loading...</p>
         )}
       </div>
     </div>
