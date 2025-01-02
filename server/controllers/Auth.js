@@ -51,7 +51,7 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    c//onsole.log(email,password)
+    //console.log(email,password)
 
     if (!email || !password) {
       return res.status(400).json({
