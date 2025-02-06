@@ -22,9 +22,17 @@ const {cloudinaryConnect} = require("../server/config/cloudinary");
 cloudinaryConnect();
 
 
+// app.use(cors({
+//     origin:'*'                         
+//   }));
+
 app.use(cors({
-    origin:'*'                         
-  }));
+  origin: 'https://food-app-1-apbl.onrender.com', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  allowedHeaders: ['Content-Type', 'Authorization'], 
+  credentials: true, 
+}));
+
 
 const userRoute = require("./routes/User");
 const Upload = require('./routes/FileUpload');
