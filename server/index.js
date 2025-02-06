@@ -26,12 +26,7 @@ cloudinaryConnect();
 //     origin:'*'                         
 //   }));
 
-app.use(cors({
-  origin: 'https://food-app-1-apbl.onrender.com', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-  allowedHeaders: ['Content-Type', 'Authorization'], 
-  credentials: true, 
-}));
+app.use(cors());
 
 
 const userRoute = require("./routes/User");
