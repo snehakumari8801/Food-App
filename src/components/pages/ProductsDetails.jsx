@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setFormDetails, setLoading,setCurrentId } from '../../slices/userSlice';
+import { setFormDetails, setTotalAmount ,setLoading,setCurrentId } from '../../slices/userSlice';
 import { getAllProducts } from '../../services/operations/Authapi';
 import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
 import { buyProducts } from '../../services/operations/Authapi';
 
+
 function ProductsDetails() {
     const [allProducts, setAllProducts] = useState([]);
+    // const [foodPrice,setFoodPrice] = useState(0);
+    let foodPrice = 0;
+    console.log(foodPrice);
+    
+
     const dispatch = useDispatch();
-    const { token } = useSelector((state) => state.auth);
+    const { token ,  totalAmount } = useSelector((state) => state.auth);
     const { formDetails } = useSelector((state) => state.auth);
     const { id } = useParams();
     
@@ -40,11 +46,15 @@ function ProductsDetails() {
     }, [dispatch]); 
 
    // useEffect(()=>{
-       const buyHandler = async(id)=>{
+       const buyHandler = async(id,price)=>{
+
+        console.log(price);
+        
          setLoading(true);
          try{
           let result = await buyProducts(id,token);
           dispatch(setCurrentId(id));
+          dispatch(setTotalAmount(price));
          }catch(error){
             console.log(error.message)
          }
@@ -59,7 +69,6 @@ function ProductsDetails() {
         <div className='overflow-x-hidden'>
         <Navbar/>
             <h1 className='flex flex-col justify-center items-center'>Product Details</h1>
-           
                  {currentProduct ? (
                 <div className='flex flex-col justify-center items-center m-10 mt-20 
                 capitalize '>
@@ -68,11 +77,13 @@ function ProductsDetails() {
                      className='h-[300px] w-[300px] mt-5'/>
                     <p className='line-through mt-5'>Price: Rs.{currentProduct.price}</p>
                     <p>Offered Price: Rs.{currentProduct.newPrice}</p>
+                    <p>{totalAmount}</p>
+
                     <div className='flex gap-10'>
                    
                     <Link to='/cart'>
                     <button className='bg-green-500 w-[120px] p-1 mt-2 text-white font-semibold' 
-                    onClick={()=>buyHandler(currentProduct._id)}>Buy now</button>
+                    onClick={()=>buyHandler(currentProduct._id,currentProduct.newPrice)}>Buy now</button>
                     </Link>
                     </div>
                 </div>

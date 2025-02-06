@@ -15,6 +15,7 @@ const initialState = {
   editProduct: null,
   editProductId: null,
   formDetails: [],
+  totalAmount:0,
   cart: [],
   currentId: null,
   isToggle: false,
@@ -35,6 +36,9 @@ const userSlice = createSlice({
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
+    },
+    setTotalAmount: (state, action) => {
+      state.totalAmount = action.payload;
     },
     setProducts: (state, action) => {
       state.products = action.payload;
@@ -89,6 +93,7 @@ export const {
   isToggle,
   setIsToggle,
   user,
+  setTotalAmount
 } = userSlice.actions;
 
 // Export reducer

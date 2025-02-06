@@ -10,6 +10,7 @@ function Allproducts() {
   const [allProducts, setAllProducts] = useState([]);
   const [loading, setLoadingState] = useState(true);
   const [error, setError] = useState(null);
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { token, user } = useSelector((state) => state.auth);
