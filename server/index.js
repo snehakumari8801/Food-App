@@ -23,7 +23,7 @@ cloudinaryConnect();
 
 
 app.use(cors({
-    origin:'http://localhost:3000'                         
+    origin:'*'                         
   }));
 
 const userRoute = require("./routes/User");
